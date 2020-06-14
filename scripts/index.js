@@ -15,7 +15,11 @@ const previousWeatherToggle = document.querySelector('.show-previous-weather');
 const previousWeather = document.querySelector('.previous-weather');
 const speedUnits = document.querySelector('[data-speed-unit]');
 const windSpeedText = document.querySelector('[data-wind-speed]');
-const tempUnits = document.querySelector('[data-temp-unit]');
+const tempUnitHigh = document.querySelector('[data-temp-unit-high]');
+const tempUnitLow = document.querySelector('[data-temp-unit-low]');
+
+console.log(tempUnitHigh);
+console.log(tempUnitLow);
 
 previousWeatherToggle.addEventListener('click', () => {
 	previousWeather.classList.toggle('show-weather')
@@ -25,13 +29,18 @@ unitToggle.addEventListener('click', function(){
     
     if(isMetric()){
         speedUnits.innerHTML = 'mph';
-        tempUnits.innerHTML = 'F';
+        tempUnitHigh.innerHTML = 'F';
+        tempUnitLow.innerHTML = 'F';
         metricRadio.checked = false;
         imperialRadio.checked = true;
 
-        var temperature = currentTempHighElement.innerHTML;
-        value = changeToF(temperature);
+        var temperatureHigh = currentTempHighElement.innerHTML;
+        value = changeToF(temperatureHigh);
         currentTempHighElement.innerHTML = value;
+
+        var temperatureLow = currentTempLowElement.innerHTML;
+        value = changeToF(temperatureLow);
+        currentTempLowElement.innerHTML = value;
 
         var speed = windSpeedText.innerHTML;
         newSpeed = changetomph(speed);
@@ -39,9 +48,13 @@ unitToggle.addEventListener('click', function(){
         
     }
     else{
-        var temperature = currentTempHighElement.innerHTML;
-        value = changeToC(temperature);
+        var temperatureHigh = currentTempHighElement.innerHTML;
+        value = changeToC(temperatureHigh);
         currentTempHighElement.innerHTML = value;
+
+        var temperatureLow = currentTempLowElement.innerHTML;
+        value = changeToC(temperatureLow);
+        currentTempLowElement.innerHTML = value;
 
         var speed = windSpeedText.innerHTML;
         newSpeed = changetokph(speed);
@@ -50,7 +63,8 @@ unitToggle.addEventListener('click', function(){
         metricRadio.checked = true;
         imperialRadio.checked = false;
         speedUnits.innerHTML = 'kph';
-        tempUnits.innerHTML = 'C';
+        tempUnitHigh.innerHTML = 'C';
+        tempUnitLow.innerHTML = 'C';
     }
 
 });
@@ -132,7 +146,8 @@ function displayPreviousSols(sols) {
             metricRadio.checked = true;
             imperialRadio.checked = false;
             speedUnits.innerHTML = 'kph';
-            tempUnits.innerHTML = 'C';
+            tempUnitHigh.innerHTML = 'C';
+            tempUnitLow.innerHTML = 'C';
         }
 
         selectedSolIndex = index;
